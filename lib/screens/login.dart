@@ -10,7 +10,6 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentUser = ref.watch(firebaseAuthProvider).currentUser;
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
@@ -57,13 +56,6 @@ class LoginScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            if (currentUser != null)
-              TextButton(
-                onPressed: () {
-                  ref.read(firebaseAuthProvider).signOut();
-                },
-                child: Text("logout"),
-              )
           ],
         ),
       ),
