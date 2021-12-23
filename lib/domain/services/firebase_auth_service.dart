@@ -14,7 +14,14 @@ class FirebaseAuthService {
   FirebaseAuthService(this._read);
   final Reader _read;
 
-  Future<UserCredential> signInWithGoogle() async {
+  Future<void> signOut() async {
+    await _read(firebaseAuthProvider).signOut();
+  }
+
+  Stream<User?> get authStateChanges =>
+      _read(firebaseAuthProvider).authStateChanges();
+
+  Future<UserCredential?> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     final GoogleSignInAuthentication? googleAuth =
