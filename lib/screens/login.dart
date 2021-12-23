@@ -1,13 +1,16 @@
+import 'package:fb_chat_riverpod/domain/services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends ConsumerWidget {
   const LoginScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(firebaseAuthProvider).currentUser;
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
@@ -28,7 +31,9 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  ref.read(firebaseAuthServiceProvider).signInWithGoogle();
+                },
                 style: ButtonStyle(
                   side: MaterialStateProperty.all(
                     const BorderSide(color: Colors.black12),
@@ -51,7 +56,14 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
+            if (currentUser != null)
+              TextButton(
+                onPressed: () {
+                  ref.read(firebaseAuthProvider).signOut();
+                },
+                child: Text("logout"),
+              )
           ],
         ),
       ),
