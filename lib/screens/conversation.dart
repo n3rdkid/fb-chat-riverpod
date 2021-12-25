@@ -5,8 +5,14 @@ class Conversations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Conversation'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Conversations'),
+        actions: [],
+      ),
+      body: Container(
+        child: Text('Conversation'),
+      ),
     );
   }
 }

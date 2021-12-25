@@ -1,4 +1,5 @@
 import 'package:fb_chat_riverpod/domain/services/firebase_auth_service.dart';
+import 'package:fb_chat_riverpod/router/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,8 +31,16 @@ class LoginScreen extends ConsumerWidget {
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                onPressed: () {
-                  ref.read(firebaseAuthServiceProvider).signInWithGoogle();
+                onPressed: () async {
+                  try {
+                    await ref
+                        .read(firebaseAuthServiceProvider)
+                        .signInWithGoogle();
+                    Navigator.pushReplacementNamed(
+                        context, Screens.ConversationPath);
+                  } catch (e) {
+                    //
+                  }
                 },
                 style: ButtonStyle(
                   side: MaterialStateProperty.all(

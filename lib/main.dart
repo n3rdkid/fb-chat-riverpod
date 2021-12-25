@@ -1,3 +1,4 @@
+import 'package:fb_chat_riverpod/router/screens.dart';
 import 'package:fb_chat_riverpod/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 640),
-      builder: () => const MaterialApp(
+      builder: () => MaterialApp(
         useInheritedMediaQuery: true,
-        home: MyHomePage(title: 'Peuco Chat'),
+        home: const MyHomePage(title: 'Peuco Chat'),
+        onGenerateRoute: (settings) {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (BuildContext context) {
+              if (Screens.rts.containsKey(settings.name)) {
+                return Screens.rts[settings.name]!(settings.arguments);
+              }
+              return Container();
+            },
+          );
+        },
       ),
     );
   }
