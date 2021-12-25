@@ -1,3 +1,4 @@
+import 'package:fb_chat_riverpod/ui/organisms/page_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class Conversations extends StatelessWidget {
@@ -5,14 +6,9 @@ class Conversations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Conversations'),
-        actions: [],
-      ),
-      body: Container(
-        child: Text('Conversation'),
-      ),
+    return PageWrappper(
+      title: 'Conversations',
+      child: Container(color: Colors.red),
     );
   }
 }

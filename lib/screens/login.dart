@@ -37,7 +37,7 @@ class LoginScreen extends ConsumerWidget {
                         .read(firebaseAuthServiceProvider)
                         .signInWithGoogle();
                     Navigator.pushReplacementNamed(
-                        context, Screens.ConversationPath);
+                        context, Screens.MessagesPath);
                   } catch (e) {
                     //
                   }
