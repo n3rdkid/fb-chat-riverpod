@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:fb_chat_riverpod/screens/chat_users_list.dart';
 import 'package:fb_chat_riverpod/screens/conversation.dart';
 import 'package:fb_chat_riverpod/screens/login.dart';
 import 'package:fb_chat_riverpod/screens/messages.dart';
@@ -12,10 +13,12 @@ class Screens {
   static const String LoginPath = '/login';
   static const String ConversationPath = '/conversation';
   static const String MessagesPath = '/messages';
+  static const String ChatUsersListPath = '/chat-users-list';
 // Map routeToScreen
   static final Map<String, ScreensBuilder> rts = <String, ScreensBuilder>{
     LoginPath: (context) => const LoginScreen(),
     ConversationPath: (context) => const Conversations(),
     MessagesPath: (context) => const Messages(),
+    ChatUsersListPath: (context) => const ChatUsersList(),
   };
 }
