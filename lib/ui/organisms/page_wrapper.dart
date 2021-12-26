@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class PageWrappper extends StatelessWidget {
-  const PageWrappper({Key? key, required this.title, required this.child})
-      : super(key: key);
+  const PageWrappper({
+    Key? key,
+    required this.title,
+    required this.child,
+    this.fab,
+  }) : super(key: key);
 
   final String title;
   final Widget child;
+  final Widget? fab;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,6 +20,7 @@ class PageWrappper extends StatelessWidget {
       body: SafeArea(
         child: child,
       ),
+      floatingActionButton: fab,
     );
   }
 }
