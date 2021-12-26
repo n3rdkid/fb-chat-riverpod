@@ -1,14 +1,17 @@
 import 'package:flutter/widgets.dart';
 
 class ChatAvatar extends StatelessWidget {
-  const ChatAvatar({Key? key}) : super(key: key);
-
+  const ChatAvatar({
+    Key? key,
+    required this.imageUrl,
+  }) : super(key: key);
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(32),
       child: Image.network(
-        'https://i.pravatar.cc/64',
+        imageUrl,
         width: 64,
         height: 64,
       ),
