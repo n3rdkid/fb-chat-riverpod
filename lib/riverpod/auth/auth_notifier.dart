@@ -22,5 +22,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
   StreamSubscription<User?>? _$authStateChange;
   final Reader _read;
 
-  Future<void> signOut() => _read(firebaseAuthServiceProvider).signOut();
+  Future<void> signOut() {
+    state = const AuthState.user(null);
+    return _read(firebaseAuthServiceProvider).signOut();
+  }
 }
