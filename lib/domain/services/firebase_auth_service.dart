@@ -1,3 +1,4 @@
+import 'package:fb_chat_riverpod/domain/services/firebase_chat_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -32,6 +33,16 @@ class FirebaseAuthService {
       idToken: googleAuth?.idToken,
     );
 
-    return await _read(firebaseAuthProvider).signInWithCredential(credential);
+    final userCredential =
+        await _read(firebaseAuthProvider).signInWithCredential(credential);
+    final isNewUser = userCredential.additionalUserInfo?.isNewUser ?? false;
+    if (isNewUser) {
+      await _read(fireStoreProvider).collection('users').add({
+        'user_email': userCredential.user?.email,
+        'user_name': userCredential.user?.displayName,
+        'photo_url': userCredential.user?.photoURL,
+      });
+    }
+    return userCredential;
   }
 }
