@@ -8,6 +8,7 @@ class FirebaseChatUser with _$FirebaseChatUser {
   const FirebaseChatUser._();
 
   factory FirebaseChatUser({
+    @Default('') String id,
     @JsonKey(name: 'photo_url') String? photoUrl,
     @JsonKey(name: 'user_name') @Default('') String name,
     @JsonKey(name: 'user_email') @Default('') String email,

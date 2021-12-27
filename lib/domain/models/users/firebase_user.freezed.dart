@@ -22,10 +22,12 @@ class _$FirebaseChatUserTearOff {
   const _$FirebaseChatUserTearOff();
 
   _FirebaseChatUser call(
-      {@JsonKey(name: 'photo_url') String? photoUrl,
+      {String id = '',
+      @JsonKey(name: 'photo_url') String? photoUrl,
       @JsonKey(name: 'user_name') String name = '',
       @JsonKey(name: 'user_email') String email = ''}) {
     return _FirebaseChatUser(
+      id: id,
       photoUrl: photoUrl,
       name: name,
       email: email,
@@ -42,6 +44,7 @@ const $FirebaseChatUser = _$FirebaseChatUserTearOff();
 
 /// @nodoc
 mixin _$FirebaseChatUser {
+  String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'photo_url')
   String? get photoUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_name')
@@ -61,7 +64,8 @@ abstract class $FirebaseChatUserCopyWith<$Res> {
           FirebaseChatUser value, $Res Function(FirebaseChatUser) then) =
       _$FirebaseChatUserCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'photo_url') String? photoUrl,
+      {String id,
+      @JsonKey(name: 'photo_url') String? photoUrl,
       @JsonKey(name: 'user_name') String name,
       @JsonKey(name: 'user_email') String email});
 }
@@ -77,11 +81,16 @@ class _$FirebaseChatUserCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? photoUrl = freezed,
     Object? name = freezed,
     Object? email = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       photoUrl: photoUrl == freezed
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
@@ -106,7 +115,8 @@ abstract class _$FirebaseChatUserCopyWith<$Res>
       __$FirebaseChatUserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'photo_url') String? photoUrl,
+      {String id,
+      @JsonKey(name: 'photo_url') String? photoUrl,
       @JsonKey(name: 'user_name') String name,
       @JsonKey(name: 'user_email') String email});
 }
@@ -124,11 +134,16 @@ class __$FirebaseChatUserCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? photoUrl = freezed,
     Object? name = freezed,
     Object? email = freezed,
   }) {
     return _then(_FirebaseChatUser(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       photoUrl: photoUrl == freezed
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
@@ -149,7 +164,8 @@ class __$FirebaseChatUserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_FirebaseChatUser extends _FirebaseChatUser {
   _$_FirebaseChatUser(
-      {@JsonKey(name: 'photo_url') this.photoUrl,
+      {this.id = '',
+      @JsonKey(name: 'photo_url') this.photoUrl,
       @JsonKey(name: 'user_name') this.name = '',
       @JsonKey(name: 'user_email') this.email = ''})
       : super._();
@@ -157,6 +173,9 @@ class _$_FirebaseChatUser extends _FirebaseChatUser {
   factory _$_FirebaseChatUser.fromJson(Map<String, dynamic> json) =>
       _$$_FirebaseChatUserFromJson(json);
 
+  @JsonKey()
+  @override
+  final String id;
   @override
   @JsonKey(name: 'photo_url')
   final String? photoUrl;
@@ -169,7 +188,7 @@ class _$_FirebaseChatUser extends _FirebaseChatUser {
 
   @override
   String toString() {
-    return 'FirebaseChatUser(photoUrl: $photoUrl, name: $name, email: $email)';
+    return 'FirebaseChatUser(id: $id, photoUrl: $photoUrl, name: $name, email: $email)';
   }
 
   @override
@@ -177,6 +196,7 @@ class _$_FirebaseChatUser extends _FirebaseChatUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _FirebaseChatUser &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.photoUrl, photoUrl) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.email, email));
@@ -185,6 +205,7 @@ class _$_FirebaseChatUser extends _FirebaseChatUser {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(photoUrl),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(email));
@@ -202,7 +223,8 @@ class _$_FirebaseChatUser extends _FirebaseChatUser {
 
 abstract class _FirebaseChatUser extends FirebaseChatUser {
   factory _FirebaseChatUser(
-      {@JsonKey(name: 'photo_url') String? photoUrl,
+      {String id,
+      @JsonKey(name: 'photo_url') String? photoUrl,
       @JsonKey(name: 'user_name') String name,
       @JsonKey(name: 'user_email') String email}) = _$_FirebaseChatUser;
   _FirebaseChatUser._() : super._();
@@ -210,6 +232,8 @@ abstract class _FirebaseChatUser extends FirebaseChatUser {
   factory _FirebaseChatUser.fromJson(Map<String, dynamic> json) =
       _$_FirebaseChatUser.fromJson;
 
+  @override
+  String get id;
   @override
   @JsonKey(name: 'photo_url')
   String? get photoUrl;
