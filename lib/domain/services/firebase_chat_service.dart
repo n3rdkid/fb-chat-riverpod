@@ -14,12 +14,11 @@ class FirebaseChatService {
   Future<List<FirebaseChatUser>> getUsers() async {
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
         await _read(fireStoreProvider).collection('users').get();
-
     final List<FirebaseChatUser> usersList = querySnapshot.docs.fold(
       [],
       (previousValue, data) => [
         ...previousValue,
-        FirebaseChatUser.fromJson(data.data()),
+        FirebaseChatUser.fromJson({'id': data.id, ...data.data()}),
       ],
     );
 
