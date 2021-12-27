@@ -1,4 +1,6 @@
 import 'package:fb_chat_riverpod/riverpod/chat_users_list/chat_user_list_provider.dart';
+import 'package:fb_chat_riverpod/router/screen_args/conversation_args.dart';
+import 'package:fb_chat_riverpod/router/screens.dart';
 import 'package:fb_chat_riverpod/ui/atoms/loading_indicator.dart';
 import 'package:fb_chat_riverpod/ui/molecules/message_tile.dart';
 import 'package:fb_chat_riverpod/ui/organisms/page_wrapper.dart';
@@ -23,10 +25,21 @@ class ChatUsersList extends ConsumerWidget {
                   child: ListView.separated(
                     padding: const EdgeInsets.all(24),
                     itemBuilder: (context, index) {
+                      final user = users[index];
                       return MessageTile(
-                        name: users[index].name,
-                        image: users[index].photoUrl ?? '',
-                        onTap: () {},
+                        name: user.name,
+                        image: user.photoUrl ?? '',
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            Screens.ConversationPath,
+                            arguments: ConversationScreenArgs(
+                              receiverId: user.id,
+                              receiverName: user.name,
+                              receiverImage: user.photoUrl ?? '',
+                            ),
+                          );
+                        },
                         showLastMessage: false,
                       );
                     },
