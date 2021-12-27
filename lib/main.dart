@@ -1,5 +1,8 @@
+import 'package:fb_chat_riverpod/riverpod/auth/auth_notifier.dart';
 import 'package:fb_chat_riverpod/router/screens.dart';
 import 'package:fb_chat_riverpod/screens/login.dart';
+import 'package:fb_chat_riverpod/screens/messages.dart';
+import 'package:fb_chat_riverpod/ui/atoms/loading_indicator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,16 +18,20 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ScreenUtilInit(
       designSize: const Size(360, 640),
       builder: () => MaterialApp(
         useInheritedMediaQuery: true,
-        home: const MyHomePage(title: 'Peuco Chat'),
+        home: ref.watch(authNotifier).maybeWhen(
+              orElse: () => const LoginScreen(),
+              loading: () => const LoadingIndicator(),
+              user: (_) => const Messages(),
+            ),
         onGenerateRoute: (settings) {
           return MaterialPageRoute(
             settings: settings,
@@ -37,26 +44,6 @@ class MyApp extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: const LoginScreen(),
     );
   }
 }

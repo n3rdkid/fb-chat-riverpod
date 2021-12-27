@@ -15,7 +15,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     _$authStateChange =
         _read(firebaseAuthServiceProvider).authStateChanges.listen(
       (User? user) {
-        state = AuthState.user(user);
+        if (user != null) {
+          state = AuthState.user(user);
+        }
+        state = const AuthState.initializing();
       },
     );
   }
@@ -23,7 +26,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final Reader _read;
 
   Future<void> signOut() {
-    state = const AuthState.user(null);
     return _read(firebaseAuthServiceProvider).signOut();
   }
 }

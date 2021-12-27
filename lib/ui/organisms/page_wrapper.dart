@@ -1,4 +1,5 @@
 import 'package:fb_chat_riverpod/riverpod/auth/auth_notifier.dart';
+import 'package:fb_chat_riverpod/router/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,8 +21,10 @@ class PageWrappper extends ConsumerWidget {
         title: Text(title),
         actions: [
           IconButton(
-            onPressed: () {
-              ref.read(authNotifier.notifier).signOut();
+            onPressed: () async {
+              await ref.read(authNotifier.notifier).signOut();
+              Navigator.pushNamedAndRemoveUntil(context, Screens.LoginPath,
+                  (route) => route == Screens.LoginPath);
             },
             icon: const Icon(Icons.logout),
           )
