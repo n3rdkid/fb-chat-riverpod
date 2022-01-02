@@ -1,4 +1,5 @@
 import 'package:fb_chat_riverpod/domain/services/firebase_auth_service.dart';
+import 'package:fb_chat_riverpod/router/screen_args/conversation_args.dart';
 import 'package:fb_chat_riverpod/router/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +14,7 @@ class LoginScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Peuco Chat'),
+        title: const Text('Peuco Chat'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -41,7 +42,14 @@ class LoginScreen extends ConsumerWidget {
                           .read(firebaseAuthServiceProvider)
                           .signInWithGoogle();
                       Navigator.pushReplacementNamed(
-                          context, Screens.MessagesPath);
+                        context,
+                        Screens.ConversationPath,
+                        arguments: ConversationScreenArgs(
+                            receiverId: 'of7NX6QoeBvcSI7oulgO',
+                            receiverName: 'Laxmi Adhikari',
+                            receiverImage:
+                                'https://lh3.googleusercontent.com/a-/AOh14GjOxQEGpFeFNhcosBMk8lyDXIDuJckcIcwg-11b=s96-c'),
+                      );
                     } catch (e) {
                       //
                     }
