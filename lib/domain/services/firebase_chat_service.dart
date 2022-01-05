@@ -37,12 +37,11 @@ class FirebaseChatService {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getConversation(
       String conversationId) {
-    var data = _read(fireStoreProvider)
+    return _read(fireStoreProvider)
         .collection('/conversations')
         .doc(conversationId)
         .collection('/messages')
         .orderBy('sentAt')
         .snapshots();
-    return data;
   }
 }
