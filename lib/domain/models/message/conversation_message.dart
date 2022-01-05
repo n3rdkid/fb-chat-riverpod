@@ -11,7 +11,7 @@ class ConversationMessage with _$ConversationMessage {
     @Default('') String senderId,
     @Default('') String receiverId,
     @Default('') String message,
-    DateTime? sentAt,
+    @JsonKey(name: 'sent_at') DateTime? sentAt,
   }) = _ConversationMessage;
 
   factory ConversationMessage.fromJson(Map<String, dynamic> json) =>

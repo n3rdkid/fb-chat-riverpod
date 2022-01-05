@@ -13,9 +13,9 @@ _$_ConversationMessage _$$_ConversationMessageFromJson(
       senderId: json['senderId'] as String? ?? '',
       receiverId: json['receiverId'] as String? ?? '',
       message: json['message'] as String? ?? '',
-      sentAt: json['sentAt'] == null
+      sentAt: json['sent_at'] == null
           ? null
-          : DateTime.parse(json['sentAt'] as String),
+          : DateTime.parse(json['sent_at'] as String),
     );
 
 Map<String, dynamic> _$$_ConversationMessageToJson(
@@ -25,5 +25,5 @@ Map<String, dynamic> _$$_ConversationMessageToJson(
       'senderId': instance.senderId,
       'receiverId': instance.receiverId,
       'message': instance.message,
-      'sentAt': instance.sentAt?.toIso8601String(),
+      'sent_at': instance.sentAt?.toIso8601String(),
     };

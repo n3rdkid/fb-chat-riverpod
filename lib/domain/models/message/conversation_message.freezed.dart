@@ -26,7 +26,7 @@ class _$ConversationMessageTearOff {
       String senderId = '',
       String receiverId = '',
       String message = '',
-      DateTime? sentAt}) {
+      @JsonKey(name: 'sent_at') DateTime? sentAt}) {
     return _ConversationMessage(
       id: id,
       senderId: senderId,
@@ -50,6 +50,7 @@ mixin _$ConversationMessage {
   String get senderId => throw _privateConstructorUsedError;
   String get receiverId => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sent_at')
   DateTime? get sentAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -68,7 +69,7 @@ abstract class $ConversationMessageCopyWith<$Res> {
       String senderId,
       String receiverId,
       String message,
-      DateTime? sentAt});
+      @JsonKey(name: 'sent_at') DateTime? sentAt});
 }
 
 /// @nodoc
@@ -125,7 +126,7 @@ abstract class _$ConversationMessageCopyWith<$Res>
       String senderId,
       String receiverId,
       String message,
-      DateTime? sentAt});
+      @JsonKey(name: 'sent_at') DateTime? sentAt});
 }
 
 /// @nodoc
@@ -180,7 +181,7 @@ class _$_ConversationMessage extends _ConversationMessage {
       this.senderId = '',
       this.receiverId = '',
       this.message = '',
-      this.sentAt})
+      @JsonKey(name: 'sent_at') this.sentAt})
       : super._();
 
   factory _$_ConversationMessage.fromJson(Map<String, dynamic> json) =>
@@ -199,6 +200,7 @@ class _$_ConversationMessage extends _ConversationMessage {
   @override
   final String message;
   @override
+  @JsonKey(name: 'sent_at')
   final DateTime? sentAt;
 
   @override
@@ -246,7 +248,7 @@ abstract class _ConversationMessage extends ConversationMessage {
       String senderId,
       String receiverId,
       String message,
-      DateTime? sentAt}) = _$_ConversationMessage;
+      @JsonKey(name: 'sent_at') DateTime? sentAt}) = _$_ConversationMessage;
   _ConversationMessage._() : super._();
 
   factory _ConversationMessage.fromJson(Map<String, dynamic> json) =
@@ -261,6 +263,7 @@ abstract class _ConversationMessage extends ConversationMessage {
   @override
   String get message;
   @override
+  @JsonKey(name: 'sent_at')
   DateTime? get sentAt;
   @override
   @JsonKey(ignore: true)
