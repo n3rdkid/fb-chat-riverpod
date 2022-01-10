@@ -5,6 +5,7 @@ import 'package:fb_chat_riverpod/ui/atoms/message.dart';
 import 'package:fb_chat_riverpod/ui/organisms/page_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 class Conversations extends ConsumerStatefulWidget {
   Conversations({Key? key, required this.args}) : super(key: key);
@@ -43,8 +44,11 @@ class _Conversations extends ConsumerState<Conversations> {
   }
 
   void addToMessage(ConversationMessage msg) async {
+    final previousMessages = [...messages];
+    previousMessages
+        .removeWhere((oldMsg) => msg.reconsileId == oldMsg.reconsileId);
     setState(() {
-      messages = [...messages, msg];
+      messages = [...previousMessages, msg];
     });
     await _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
@@ -104,9 +108,11 @@ class _Conversations extends ConsumerState<Conversations> {
                           final message = _messageController.text.trim();
                           if (message.isNotEmpty) {
                             FocusScope.of(context).unfocus();
+                            final reconsileId = Uuid().v4();
                             _messageController.text = '';
                             addToMessage(
                               ConversationMessage(
+                                reconsileId: reconsileId,
                                 message: message,
                                 receiverId: args.receiverId,
                                 senderId: 'jE6rkzCymLeEXVOlKndU',
@@ -117,6 +123,7 @@ class _Conversations extends ConsumerState<Conversations> {
                             ref.read(firebaseChatServiceProvider).sendMessage(
                                   'RvSZapV7VPZYP2vjiREu',
                                   ConversationMessage(
+                                    reconsileId: reconsileId,
                                     message: message,
                                     receiverId: args.receiverId,
                                     senderId: 'jE6rkzCymLeEXVOlKndU',

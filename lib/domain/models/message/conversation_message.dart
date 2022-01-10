@@ -21,6 +21,7 @@ class ConversationMessage with _$ConversationMessage {
 
   Map<String, dynamic> toConversationParams() {
     return {
+      'reconsileId': reconsileId,
       'isSent': true,
       'message': message,
       'senderId': senderId,
