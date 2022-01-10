@@ -22,12 +22,16 @@ class _$ConversationMessageTearOff {
   const _$ConversationMessageTearOff();
 
   _ConversationMessage call(
-      {String id = '',
+      {String reconsileId = '',
+      bool isSent = false,
+      String id = '',
       String senderId = '',
       String receiverId = '',
       String message = '',
       @JsonKey(name: 'sent_at') DateTime? sentAt}) {
     return _ConversationMessage(
+      reconsileId: reconsileId,
+      isSent: isSent,
       id: id,
       senderId: senderId,
       receiverId: receiverId,
@@ -46,6 +50,8 @@ const $ConversationMessage = _$ConversationMessageTearOff();
 
 /// @nodoc
 mixin _$ConversationMessage {
+  String get reconsileId => throw _privateConstructorUsedError;
+  bool get isSent => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get senderId => throw _privateConstructorUsedError;
   String get receiverId => throw _privateConstructorUsedError;
@@ -65,7 +71,9 @@ abstract class $ConversationMessageCopyWith<$Res> {
           ConversationMessage value, $Res Function(ConversationMessage) then) =
       _$ConversationMessageCopyWithImpl<$Res>;
   $Res call(
-      {String id,
+      {String reconsileId,
+      bool isSent,
+      String id,
       String senderId,
       String receiverId,
       String message,
@@ -83,6 +91,8 @@ class _$ConversationMessageCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? reconsileId = freezed,
+    Object? isSent = freezed,
     Object? id = freezed,
     Object? senderId = freezed,
     Object? receiverId = freezed,
@@ -90,6 +100,14 @@ class _$ConversationMessageCopyWithImpl<$Res>
     Object? sentAt = freezed,
   }) {
     return _then(_value.copyWith(
+      reconsileId: reconsileId == freezed
+          ? _value.reconsileId
+          : reconsileId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isSent: isSent == freezed
+          ? _value.isSent
+          : isSent // ignore: cast_nullable_to_non_nullable
+              as bool,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -122,7 +140,9 @@ abstract class _$ConversationMessageCopyWith<$Res>
       __$ConversationMessageCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {String reconsileId,
+      bool isSent,
+      String id,
       String senderId,
       String receiverId,
       String message,
@@ -142,6 +162,8 @@ class __$ConversationMessageCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? reconsileId = freezed,
+    Object? isSent = freezed,
     Object? id = freezed,
     Object? senderId = freezed,
     Object? receiverId = freezed,
@@ -149,6 +171,14 @@ class __$ConversationMessageCopyWithImpl<$Res>
     Object? sentAt = freezed,
   }) {
     return _then(_ConversationMessage(
+      reconsileId: reconsileId == freezed
+          ? _value.reconsileId
+          : reconsileId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isSent: isSent == freezed
+          ? _value.isSent
+          : isSent // ignore: cast_nullable_to_non_nullable
+              as bool,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -177,7 +207,9 @@ class __$ConversationMessageCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ConversationMessage extends _ConversationMessage {
   _$_ConversationMessage(
-      {this.id = '',
+      {this.reconsileId = '',
+      this.isSent = false,
+      this.id = '',
       this.senderId = '',
       this.receiverId = '',
       this.message = '',
@@ -187,6 +219,12 @@ class _$_ConversationMessage extends _ConversationMessage {
   factory _$_ConversationMessage.fromJson(Map<String, dynamic> json) =>
       _$$_ConversationMessageFromJson(json);
 
+  @JsonKey()
+  @override
+  final String reconsileId;
+  @JsonKey()
+  @override
+  final bool isSent;
   @JsonKey()
   @override
   final String id;
@@ -205,7 +243,7 @@ class _$_ConversationMessage extends _ConversationMessage {
 
   @override
   String toString() {
-    return 'ConversationMessage(id: $id, senderId: $senderId, receiverId: $receiverId, message: $message, sentAt: $sentAt)';
+    return 'ConversationMessage(reconsileId: $reconsileId, isSent: $isSent, id: $id, senderId: $senderId, receiverId: $receiverId, message: $message, sentAt: $sentAt)';
   }
 
   @override
@@ -213,6 +251,9 @@ class _$_ConversationMessage extends _ConversationMessage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ConversationMessage &&
+            const DeepCollectionEquality()
+                .equals(other.reconsileId, reconsileId) &&
+            const DeepCollectionEquality().equals(other.isSent, isSent) &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.senderId, senderId) &&
             const DeepCollectionEquality()
@@ -224,6 +265,8 @@ class _$_ConversationMessage extends _ConversationMessage {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(reconsileId),
+      const DeepCollectionEquality().hash(isSent),
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(senderId),
       const DeepCollectionEquality().hash(receiverId),
@@ -244,7 +287,9 @@ class _$_ConversationMessage extends _ConversationMessage {
 
 abstract class _ConversationMessage extends ConversationMessage {
   factory _ConversationMessage(
-      {String id,
+      {String reconsileId,
+      bool isSent,
+      String id,
       String senderId,
       String receiverId,
       String message,
@@ -254,6 +299,10 @@ abstract class _ConversationMessage extends ConversationMessage {
   factory _ConversationMessage.fromJson(Map<String, dynamic> json) =
       _$_ConversationMessage.fromJson;
 
+  @override
+  String get reconsileId;
+  @override
+  bool get isSent;
   @override
   String get id;
   @override

@@ -28,6 +28,7 @@ class FirebaseChatService {
 
   Future<void> sendMessage(
       String conversationId, ConversationMessage msg) async {
+    await Future.delayed(Duration(seconds: 5));
     await _read(fireStoreProvider)
         .collection('/conversations/$conversationId/messages')
         .add(

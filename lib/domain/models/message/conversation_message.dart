@@ -7,6 +7,8 @@ part 'conversation_message.g.dart';
 class ConversationMessage with _$ConversationMessage {
   const ConversationMessage._();
   factory ConversationMessage({
+    @Default('') String reconsileId,
+    @Default(false) bool isSent,
     @Default('') String id,
     @Default('') String senderId,
     @Default('') String receiverId,
@@ -19,6 +21,7 @@ class ConversationMessage with _$ConversationMessage {
 
   Map<String, dynamic> toConversationParams() {
     return {
+      'isSent': true,
       'message': message,
       'senderId': senderId,
       'receiverId': receiverId,

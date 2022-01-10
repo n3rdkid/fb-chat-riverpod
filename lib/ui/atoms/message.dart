@@ -8,6 +8,7 @@ class Message extends StatelessWidget {
     Key? key,
     required this.isSentByMe,
     required this.sentAt,
+    required this.isSent,
     required this.type,
     required this.message,
   }) : super(key: key);
@@ -15,6 +16,7 @@ class Message extends StatelessWidget {
   final String message;
   final MessageType type;
   final DateTime sentAt;
+  final bool isSent;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +30,11 @@ class Message extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.end,
             textDirection: isSentByMe ? TextDirection.ltr : TextDirection.rtl,
             children: [
-              Text(sentAt.toHourAndMinutes()),
+              Text(isSent ? sentAt.toHourAndMinutes() : 'Sending ho ni ta'),
               Container(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: isSent ? Colors.blue : Colors.grey,
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(24),
                     topRight: Radius.circular(24),
                     bottomLeft: Radius.circular(24),

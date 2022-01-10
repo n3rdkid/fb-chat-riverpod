@@ -37,14 +37,19 @@ class _Conversations extends ConsumerState<Conversations> {
                   ]);
         });
       } else if (messages.isNotEmpty && event.docs.isNotEmpty) {
-        setState(() {
-          messages = [
-            ...messages,
-            ConversationMessage.fromJson({...event.docs.last.data()})
-          ];
-        });
+        addToMessage(ConversationMessage.fromJson({...event.docs.last.data()}));
       }
     });
+  }
+
+  void addToMessage(ConversationMessage msg) async {
+    setState(() {
+      messages = [...messages, msg];
+    });
+    await _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeOut);
   }
 
   get args => widget.args;
@@ -67,6 +72,7 @@ class _Conversations extends ConsumerState<Conversations> {
                   children: [
                     for (final conversation in messages)
                       Message(
+                          isSent: conversation.isSent,
                           isSentByMe: true,
                           sentAt: DateTime.now(),
                           type: MessageType.text,
@@ -99,9 +105,16 @@ class _Conversations extends ConsumerState<Conversations> {
                           if (message.isNotEmpty) {
                             FocusScope.of(context).unfocus();
                             _messageController.text = '';
-                            await ref
-                                .read(firebaseChatServiceProvider)
-                                .sendMessage(
+                            addToMessage(
+                              ConversationMessage(
+                                message: message,
+                                receiverId: args.receiverId,
+                                senderId: 'jE6rkzCymLeEXVOlKndU',
+                                sentAt: DateTime.now(),
+                              ),
+                            );
+
+                            ref.read(firebaseChatServiceProvider).sendMessage(
                                   'RvSZapV7VPZYP2vjiREu',
                                   ConversationMessage(
                                     message: message,
@@ -110,10 +123,6 @@ class _Conversations extends ConsumerState<Conversations> {
                                     sentAt: DateTime.now(),
                                   ),
                                 );
-                            _scrollController.animateTo(
-                                _scrollController.position.maxScrollExtent,
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.easeOut);
                           }
                         },
                         icon: const Icon(Icons.send, size: 24),
